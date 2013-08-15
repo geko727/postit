@@ -1,27 +1,5 @@
 <h4>Creating a new post object</h4>
 
-<h5>HTML form</h5>
-<form action='/post' method='post'>
-Title:
-<input type='text' name='title'>
-</br>
-URL:
-<input type='text' name='url'>
-</br>
-<input type='submit'>
-</form>
+<%= render 'form' %>
 
-<h5>Model backed </h5>
-<% if @post.errors.any? %>
-	<%= @post.errors.full_messages.join(', ') %>
-<% end %>
-
-<%= form_for @post do |f| %>
-	<%= f.label :title %>
-	<%= f.text_field :title %>
-	</br>
-	<%= f.label :url %>
-	<%= f.text_field :url %>
-	</br>
-	<%= f.submit "Create Post" %>
-<% end %>
+<%= link_to 'Back', posts_path %>

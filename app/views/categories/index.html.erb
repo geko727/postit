@@ -1,0 +1,7 @@
+<h3>Welcome!</h3>
+
+<ul>
+<% @category.each do |category| %>
+	<li><%= link_to category.name, category %></li>
+<% end %>
+</ul>
