@@ -1,11 +1,9 @@
-<h5>Model backed </h5>
-<% if @category.errors.any? %>
-	<%= @category.errors.full_messages.join(', ') %>
-<% end %>
+<%= render 'shared/errors', obj: @category %>
+
 
 <%= form_for @category do |f| %>
 	<%= f.label :name %>
 	<%= f.text_field :name %>
 	</br>
-	<%= f.submit "Create category" %>
+	<%= f.submit "Create Category", class: 'btn' %>
 <% end %>

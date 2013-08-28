@@ -1,8 +1,4 @@
-
-<h5>Model backed </h5>
-<% if @post.errors.any? %>
-	<%= @post.errors.full_messages.join(', ') %>
-<% end %>
+<%= render 'shared/errors', obj: @post %>
 
 <%= form_for @post do |f| %>
 	<%= f.label :title %>
@@ -11,5 +7,5 @@
 	<%= f.label :url %>
 	<%= f.text_field :url %>
 	</br>
-	<%= f.submit "Create Post" %>
+	<%= f.submit @post.new_record? ? "Create Post" : "Update Post", class: 'btn' %>
 <% end %>

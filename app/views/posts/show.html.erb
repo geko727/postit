@@ -1,1 +1,26 @@
 <h4>You are looking at <%= @post.title %> </h4>
+<p>URL: <%= @post.url %></p>
+<p>Description: <%= @post.description %></p>
+
+
+<p>
+    <%= render 'shared/errors', obj: @comment %>
+	<%= form_for [@post, @comment] do |f| %>
+		<%= f.text_area :body %>
+		</br>
+		<%= f.submit "Create comment", class: 'btn btn-primary' %>
+	<% end%>
+
+
+
+
+
+	<h5>Comments:</h5>
+	<ol>
+		<% @post.comments.each do |comment| %>
+			<li><%= comment.body %></li>
+		<% end %>
+	</ol>
+</p>
+	
+
