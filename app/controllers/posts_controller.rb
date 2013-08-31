@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, only: [:new, :create, :edit, :update]
   before_action :require_creator, only: [:edit, :update]
 
@@ -41,11 +41,17 @@ class PostsController < ApplicationController
     else
       render :edit
     end 
-  end    
+  end   
+
+  def vote
+    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    flash[:notice] = "your vote was counted"
+    redirect_to posts_path
+  end 
 
   private
   def post_params 
-    params.require(:post).permit(:url, :title)
+    params.require(:post).permit(:url, :title, :description)
   end
 
   def set_post
