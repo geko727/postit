@@ -2,10 +2,9 @@
   <li>
     <%= link_to "Postit!", root_path, :class => 'brand' %>
   </li>
-
 	<% if logged_in? %>
 	  <li>
-	    Welcome, <%= current_user.username %>
+	    <label class='brand'>  <i class="icon-user"></i> <%= current_user.username %></label>
 	  </li>
 	  <li>
 	    <%= link_to 'New Post', new_post_path %>
