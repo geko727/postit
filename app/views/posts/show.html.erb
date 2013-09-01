@@ -20,6 +20,13 @@
 	<ol>
 		<% @post.comments.each do |comment| %>
 			<li>
+			<% if logged_in? %>
+			(
+				<%= link_to '+', vote_post_comment_path(comment.post, comment, vote: true), method: 'post' %> 
+				<%= comment.total_votes %>
+				<%= link_to '-', vote_post_comment_path(comment.post, comment, vote: false), method: 'post' %> 
+			)
+			<% end %>
 				<%= comment.body %> by <%= comment.creator.username %></li>
 		<% end %>
 	</ol>
