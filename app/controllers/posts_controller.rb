@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, only: [:new, :create, :edit, :update, :vote]
   before_action :require_creator, only: [:edit, :update]
+  before_action :require_same, only: [:vote]
 
   def index
   	@post = Post.all
@@ -60,7 +61,16 @@ class PostsController < ApplicationController
 
   def require_creator 
     access_denied unless @post.creator == current_user
+  end
 
+  def require_same 
+    @vote = Vote.all
+    @vote.each do |vote|
+      if vote.creator == current_user && vote.voteable_id == @post.id
+        flash[:error] = "You already have voted"
+        redirect_to root_path and return
+      end
+    end
   end
   
 

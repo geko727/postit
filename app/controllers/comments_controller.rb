@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
 	before_action :require_user
 	before_action :set_comment, only: [:vote]
-	
+	before_action :require_same, only: [:vote]
+
 	def create
 		@post = Post.find(params[:post_id])
 		@comment = Comment.new(params.require(:comment).permit(:body))
@@ -25,5 +26,15 @@ class CommentsController < ApplicationController
 	def set_comment
       @comment = Comment.find(params[:id])
   	end  
+
+  	def require_same 
+	    @vote = Vote.all
+	    @vote.each do |vote|
+	      if vote.creator == current_user && vote.voteable_id == @comment.id && vote.voteable_type == 'Comment'
+	        flash[:error] = "You already have voted"
+	        redirect_to post_path(params[:post_id]) and return
+	      end
+	    end
+  	end
 
 end
