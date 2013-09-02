@@ -15,7 +15,7 @@
 	</div>
 	
 	<div class='well' style='margin-left: 95px;'>
-	<%= link_to post.title, post %>
+	<%= link_to post.title, post_path(post) %>
 	<small>[<%=link_to 'link', fix_url(post.url) %>] posted at
 	<%= display_datetime(post.created_at) %> |
 	<%= link_to 'edit', edit_post_path(post) %>

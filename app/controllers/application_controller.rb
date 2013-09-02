@@ -25,5 +25,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
   
+  def require_admin
+    access_denied unless current_user && current_user.admin?
+  end
 end
 

@@ -1,4 +1,9 @@
 class CategoriesController < ApplicationController
+
+  before_action :require_admin
+
+
+
   def index
   	@category = Category.all
   end
