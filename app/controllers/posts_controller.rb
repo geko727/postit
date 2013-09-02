@@ -54,10 +54,11 @@ class PostsController < ApplicationController
       end 
 
       format.js
+      #commit
 
     end
   end
-  
+
   private
   def post_params 
     params.require(:post).permit(:url, :title, :description)
